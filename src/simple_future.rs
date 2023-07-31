@@ -1,8 +1,8 @@
-use std::pin::Pin;
-use std::sync::mpsc::{sync_channel , Receiver, SyncSender};
 use std::sync::{Arc, Mutex};
+use std::sync::mpsc::{sync_channel, Receiver, SyncSender};
 use std::task::{Waker, Context, Poll};
 use std::future::Future;
+use std::pin::Pin;
 use std::thread;
 use std::time::Duration;
 use futures::future::{BoxFuture, FutureExt};

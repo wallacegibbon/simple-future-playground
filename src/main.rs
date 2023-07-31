@@ -1,6 +1,5 @@
 use std::time::Duration;
-
-use simple_future_playground::{TimerFuture, Spawner, Executor, new_executor_and_spawner};
+use simple_future_playground::{TimerFuture, new_executor_and_spawner};
 
 fn main() {
 	let (executor, spawner) = new_executor_and_spawner();
@@ -11,7 +10,9 @@ fn main() {
 		println!("done.");
 	});
 
+	// Drop the spawner (SyncSender) so that executor can exit when the old task finishes.
 	drop(spawner);
+
 	executor.run();
 }
 
