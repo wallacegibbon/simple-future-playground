@@ -77,15 +77,16 @@ impl Spawner {
 			future: Mutex::new(Some(future)),
 			task_sender: self.task_sender.clone(),
 		});
-		self.task_sender.send(task).expect("task queue has been full");
+		self.task_sender
+			.send(task)
+			.expect("task queue has been full");
 	}
 }
 
 impl ArcWake for Task {
 	fn wake_by_ref(arc_self: &Arc<Self>) {
 		let cloned = arc_self.clone();
-		arc_self
-			.task_sender
+		arc_self.task_sender
 			.send(cloned)
 			.expect("task queue has been full");
 	}
